@@ -1,0 +1,34 @@
+<h1>Matches List</h1>
+<%= link_to 'Add Match', new_match_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Winner</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @resources.each do |resource| %>
+      <tr>
+        <td><%= resource.name %></td>
+        <td>
+          <% if resource.winner_team  %>
+            <%= resource.teams.find(resource.winner_team).name %> <%= resource.games.count == 3 ? '(2-1)' : '(2-0)' %>
+          <% else %> 
+            -
+          <% end %> 
+        </td>
+        <td>
+          <% unless resource.winner_team %>
+            <%= link_to 'New Game', new_match_game_path(resource) %> |
+          <% end %>
+          <%= link_to 'Match Games', match_games_path(resource) %>  |
+          <%= link_to 'Change', edit_match_path(resource) %> | 
+          <%= link_to 'Delete', resource, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

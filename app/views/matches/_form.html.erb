@@ -1,0 +1,13 @@
+<%= form_for(@resource, local: true, html: { class: 'form-horizontal' }) do |f| %>
+  <div class="form-group">
+  	<%= f.label :name %>
+  	<%= f.text_field :name, class: 'form-control'%>
+  	<span class="error"><%=  @resource.errors.messages[:name].join(' ')%></span>
+  </div>
+  <div class="form-group">
+  	<%= f.label :team_ids, "Assign Team" %> (use shift for multi select)
+    <%= f.select :team_ids, Team.all.collect {|t| [t.name, t.id]},{},{:multiple => true, class: 'form-control'} %>
+    <span class="error"><%=  @resource.errors.messages[:team_ids].join(' ')%></span>
+  </div>
+  <%= f.submit 'Save' %>
+<% end %>

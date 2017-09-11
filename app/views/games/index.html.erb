@@ -1,0 +1,36 @@
+<h1>Games List</h1>
+<% unless @match.winner_team %>
+  <%= link_to 'New Game', new_match_game_path(@match) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+    <th>Sr no.</th>
+      <th>Winner</th>
+      <th><%= @match.teams.first.name %> score</th>
+      <th><%= @match.teams.last.name %> score</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @resources.each_with_index do |resource, index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td>
+          <% if resource.t1_score == 10 %>
+            <%= Team.find(resource.t1_id).name %>
+          <% elsif resource.t2_score == 10 %>
+            <%= Team.find(resource.t2_id).name %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <td><%= resource.t1_score %></td>
+        <td><%= resource.t2_score %></td>
+        <td><%= link_to 'Change', edit_match_game_path(@match,resource) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

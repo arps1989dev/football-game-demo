@@ -1,0 +1,13 @@
+<%= form_for(@resource, local: true, html: { class: 'form-horizontal' }) do |f| %>
+  <div class="form-group">
+  	<%= f.label :first_name %>
+  	<%= f.text_field :first_name, class: 'form-control'%>
+  	<span class="error"><%=  @resource.errors.messages[:first_name].join(' ')%></span>
+  </div>
+  <div class="form-group">
+  	<%= f.label :last_name %>
+  	<%= f.text_field :last_name, class: 'form-control' %>
+  	<span class="error"><%=  @resource.errors.messages[:last_name].join(' ')%></span>
+  </div>
+  <%= f.submit %>
+<% end %>

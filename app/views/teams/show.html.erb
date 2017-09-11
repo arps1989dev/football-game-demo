@@ -1,0 +1,18 @@
+<h1><%= @resource.name %></h1>
+<%= link_to 'Back', :back %>
+  
+<table>
+  <thead>
+    <tr>
+      <th>Player Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @resource.users.each do |resource| %>
+      <tr>
+        <td><%= resource.full_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

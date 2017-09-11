@@ -1,0 +1,27 @@
+<h1>Team List</h1>
+<%= link_to 'Add Team', new_team_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Match Played</th>
+      <th>Winning count</th>
+      <th>Rank</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @resources.each_with_index do |resource, i| %>
+      <tr>
+        <td><%= resource.name %></td>
+        <td><%= resource.matches.count %></td>
+        <td><%= resource.winning_count %></td>
+        <td><%= i + 1 %></td>
+        <td><%= link_to 'Detail', resource %></td>
+        <td><%= link_to 'Change', edit_team_path(resource) %></td>
+        <td><%= link_to 'Delete', resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
